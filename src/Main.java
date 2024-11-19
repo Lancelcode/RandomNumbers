@@ -1,3 +1,5 @@
+
+
 import java.util.Arrays;
 
 public class Main {
@@ -34,19 +36,21 @@ public class Main {
             System.out.println("\nBoth algorithms took the same time: " + bubbleTime + " nanoseconds.");
         }
 
-        // Print sorted arrays (first 20 elements for quick visualization)
-        System.out.println("\nBubble Sorted Array (First 20 elements):");
+        // Print all sorted arrays (for smaller arrays, or use file output for large ones)
+        System.out.println("\nBubble Sorted Array (All elements):");
         printArray(bubbleSorted);
 
-        System.out.println("\nMerge Sorted Array (First 20 elements):");
+        System.out.println("\nMerge Sorted Array (All elements):");
         printArray(mergeSorted);
 
-        // Save the sorted results
+        // Save the sorted results to files
         FileUtils.writeIntegersToFile(bubbleSorted, "C:\\Users\\Djiby\\OneDrive\\Desktop\\BubbleSortedRandomNumbers.txt");
         FileUtils.writeIntegersToFile(mergeSorted, "C:\\Users\\Djiby\\OneDrive\\Desktop\\MergeSortedRandomNumbers.txt");
+
     }
 
     private static void printArray(int[] array) {
-        System.out.println(Arrays.toString(Arrays.copyOf(array, Math.min(array.length, 20))) + " ..."); // Print first 20 elements
+        // Print all elements of the array
+        System.out.println(Arrays.toString(array));
     }
 }
