@@ -1,11 +1,17 @@
-
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        // Create an instance of FileUtils
+        FileUtils fileUtils = new FileUtils();
+
         // Load random numbers from the file
-        int[] randomNumbers = FileUtils.readIntegersFromFile("random200000.txt");
+        int[] randomNumbers = readIntegersFromFile("random200000.txt");
 
         // Sort using Bubble Sort (Group A)
         System.out.println("\nSorting Random200000.txt using Bubble Sort...\n");
@@ -36,21 +42,34 @@ public class Main {
             System.out.println("\nBoth algorithms took the same time: " + bubbleTime + " nanoseconds.");
         }
 
-        // Print all sorted arrays (for smaller arrays, or use file output for large ones)
-        System.out.println("\nBubble Sorted Array (All elements):");
-        printArray(bubbleSorted);
-
-        System.out.println("\nMerge Sorted Array (All elements):");
-        printArray(mergeSorted);
-
         // Save the sorted results to files
-        FileUtils.writeIntegersToFile(bubbleSorted, "BubbleSortedRandomNumbers.txt");
-        FileUtils.writeIntegersToFile(mergeSorted, "MergeSortedRandomNumbers.txt");
-
+        fileUtils.saveFile("BubbleSortedRandomNumbers.txt", bubbleSorted);
+        fileUtils.saveFile("MergeSortedRandomNumbers.txt", mergeSorted);
     }
 
-    private static void printArray(int[] array) {
-        // Print all elements of the array
-        System.out.println(Arrays.toString(array));
+    private static int[] readIntegersFromFile(String filename) {
+        // Read integers from a file and return as an array
+        try {
+            File file = new File(filename);
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                ArrayList<Integer> numbersList = new ArrayList<>();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    for (String part : parts) {
+                        numbersList.add(Integer.parseInt(part.trim()));
+                    }
+                }
+                br.close();
+                return numbersList.stream().mapToInt(Integer::intValue).toArray();
+            } else {
+                System.out.println("File not found: " + filename);
+                return new int[0];
+            }
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error reading file: " + e.getLocalizedMessage());
+            return new int[0];
+        }
     }
 }
