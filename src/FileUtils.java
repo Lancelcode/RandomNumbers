@@ -29,6 +29,8 @@ public class FileUtils {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filePath)))) {
             for (int num : array) {
                 bw.write(num + "\n");
+                bw.flush();
+
             }
         } catch (IOException e) {
             System.out.println("An error occurred while writing the file.");

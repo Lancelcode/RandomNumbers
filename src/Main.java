@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         // Load random numbers from the file
-        int[] randomNumbers = FileUtils.readIntegersFromFile("C:\\Users\\Djiby\\OneDrive\\Desktop\\USA1000Cities2024\\src\\usa1000cities2024\\random200000.txt");
+        int[] randomNumbers = FileUtils.readIntegersFromFile("random200000.txt");
 
         // Sort using Bubble Sort (Group A)
         System.out.println("\nSorting Random200000.txt using Bubble Sort...\n");
@@ -44,8 +44,8 @@ public class Main {
         printArray(mergeSorted);
 
         // Save the sorted results to files
-        FileUtils.writeIntegersToFile(bubbleSorted, "C:\\Users\\Djiby\\OneDrive\\Desktop\\BubbleSortedRandomNumbers.txt");
-        FileUtils.writeIntegersToFile(mergeSorted, "C:\\Users\\Djiby\\OneDrive\\Desktop\\MergeSortedRandomNumbers.txt");
+        FileUtils.writeIntegersToFile(bubbleSorted, "BubbleSortedRandomNumbers.txt");
+        FileUtils.writeIntegersToFile(mergeSorted, "MergeSortedRandomNumbers.txt");
 
     }
 
